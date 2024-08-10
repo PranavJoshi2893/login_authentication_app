@@ -1,0 +1,21 @@
+<div class="wrapper">
+    <header>
+        <div></div>
+        <button mat-raised-button (click)="onLogout()" color="primary">Logout</button>
+    </header>
+    <main>
+        <mat-drawer-container class="container">
+            <mat-drawer mode="side" opened disableClose class="drawer">
+                <mat-nav-list>
+                    <a mat-list-item [routerLink]="link.link" *ngFor="let link of links" [activated]="link.isActive">{{
+                        link.name }}</a>
+                </mat-nav-list>
+
+            </mat-drawer>
+            <mat-drawer-content class="main">
+                <router-outlet></router-outlet>
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </main>
+    <footer></footer>
+</div>

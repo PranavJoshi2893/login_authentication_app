@@ -1,0 +1,18 @@
+.wrapper {
+  width: 22rem;
+  height: min-content;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
