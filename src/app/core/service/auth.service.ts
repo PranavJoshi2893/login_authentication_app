@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BYPASS_REFRESH } from '../interceptor/auth.interceptor';
 
 interface IResponse {
   message: string;
@@ -16,12 +17,20 @@ interface IUser {
   password: string;
 }
 
+export interface IUserList {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  verified: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly _url = "http://127.0.0.1:3000/api/v1/user";
+  private readonly _url = "http://192.168.31.123/api/v1/user";
   constructor(private readonly _http: HttpClient) { }
 
   storeToken(response: { access_token: string, refresh_token: string }): void {
@@ -52,6 +61,30 @@ export class AuthService {
 
   register(user: IUser): Observable<IResponse> {
     return this._http.post<IResponse>(`${this._url}/register`, user)
+  }
+
+  userList(): Observable<IUserList[]> {
+    return this._http.get<IUserList[]>(`${this._url}/list`);
+  }
+
+  refresh(): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.getRefreshToken()}`
+    );
+
+    const context = new HttpContext().set(BYPASS_REFRESH, true);
+
+
+    return this._http.post<any>(`${this._url}/refresh`, {}, { headers, context })
+      .pipe(
+        tap((response) => {
+          sessionStorage.setItem('access_token', response.access_token)
+        }),
+        catchError((err) => {
+          return throwError(() => err)
+        })
+      )
   }
 
 }

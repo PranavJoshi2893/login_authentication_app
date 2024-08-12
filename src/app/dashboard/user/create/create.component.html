@@ -1,29 +1,31 @@
 <div class="wrapper">
-    <form [formGroup]="registerForm" class="form" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>First Name</mat-label>
-            <input type="text" matInput formControlName="firstName">
-        </mat-form-field>
+    <div class="container">
+        <form [formGroup]="registerForm" class="form" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput formControlName="firstName">
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Last Name</mat-label>
-            <input type="text" matInput formControlName="lastName">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput formControlName="lastName">
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email">
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password">
+            </mat-form-field>
 
-        <section class="btn_section">
-            <button type="reset" mat-stroked-button color="primary">Clear</button>
-            <button type="submit" mat-raised-button color="primary">Register</button>
-        </section>
+            <section class="btn_section">
+                <button type="reset" mat-stroked-button color="primary">Clear</button>
+                <button type="submit" mat-raised-button color="primary">Register</button>
+            </section>
 
-    </form>
+        </form>
+    </div>
 </div>
